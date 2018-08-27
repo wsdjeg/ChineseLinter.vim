@@ -11,14 +11,22 @@ let s:punctuation_cn = '[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\
 let s:chars_cn = '[\u4e00-\u9fa5]'
 " 数字
 let s:numbers = '[0-9]'
+" 全角数字
+let s:numbers_cn = '[\uff10-\uff19]'
 " 英文字母
 let s:chars = '[a-zA-Z]'
+" 单位
+" TODO: 需要添加更多的单位
+let s:symbol = '[%]'
 let s:ERRORS = {
             \ 'E001' : ['中文字符后存在英文标点', s:chars_cn . s:punctuation],
             \ 'E002' : ['中英文之间没有空格', '\(' . s:chars_cn . s:chars . '\)\|\(' . s:chars . s:chars_cn . '\)'],
             \ 'E003' : ['中文与数字之间没有空格', '\(' . s:chars_cn . s:numbers . '\)\|\(' . s:numbers . s:chars_cn . '\)'],
             \ 'E004' : ['中文标点之后存在空格',  s:punctuation_cn . '\s\+'],
             \ 'E005' : ['行尾含有空格', '\s\+$'],
+            \ 'E006' : ['数字和单位之间有空格', s:numbers . '\s\+' . s:symbol],
+            \ 'E007' : ['数字使用了全角数字', s:numbers_cn],
+            \ 'E008' : ['汉字之间存在空格', s:chars_cn . '\s\+' . s:chars_cn],
             \ }
 
 
