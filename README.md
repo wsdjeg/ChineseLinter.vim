@@ -1,7 +1,5 @@
-# chinese_linter.vim
-
-中文文档语言规范检查工具
-
+# ChineseLinter.vim
+> 中文文档语言规范检查工具
 
 ## 使用说明
 
