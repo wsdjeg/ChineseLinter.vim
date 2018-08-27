@@ -20,3 +20,11 @@
 `E003` | 中文与数字之间没有空格
 `E004` | 中文标点之后存在空格
 `E005` | 行尾含有空格
+
+## 配置
+
+如果需要忽略某些错误，可以将错误代码加入选项：`g:chinese_linter_disabled_nr`
+
+```vim
+let g:chinese_linter_disabled_nr = ['E002', 'E005']
+```
