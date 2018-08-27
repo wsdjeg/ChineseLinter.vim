@@ -1,4 +1,4 @@
-sriptencoding utf-8
+scriptencoding utf-8
 " 忽略的错误
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
 " 中文标点符号（更全）
