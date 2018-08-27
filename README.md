@@ -26,3 +26,7 @@
 ```vim
 let g:chinese_linter_disabled_nr = ['E002', 'E005']
 ```
+
+## 参考指南：
+
+- [中文文案排版指北（简体中文版）](https://github.com/mzlogin/chinese-copywriting-guidelines)
