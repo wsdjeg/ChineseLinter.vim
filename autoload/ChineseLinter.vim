@@ -8,7 +8,7 @@ let s:punctuation = ','
 " 中文标点符号
 let s:punctuation_cn = '[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]'
 " 中文汉字
-let s:chars_cn = '[\u4e00-\u9fa5]'
+let s:chars_cn = '[\u4e00-\u9fff]'
 " 数字
 let s:numbers = '[0-9]'
 " 全角数字
