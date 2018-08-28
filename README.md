@@ -2,6 +2,8 @@
 
 > 中文文档语言规范检查工具
 
+[![Build Status](https://travis-ci.org/wsdjeg/ChineseLinter.vim.svg?branch=master)](https://travis-ci.org/wsdjeg/ChineseLinter.vim)
+
 ## 使用说明
 
 在编辑中文文档时，使用如下命令即可检查，错误信息将被展示在 `local list` 窗口
