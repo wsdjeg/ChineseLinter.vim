@@ -1,0 +1,3 @@
+Execute ( Test plugin option ):
+  let g:chinese_linter_disabled_nr = ['E002', 'E005']
+  AssertEqual g:chinese_linter_disabled_nr[0], 'E002'
