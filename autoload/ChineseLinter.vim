@@ -29,22 +29,22 @@ let s:chars = '[a-zA-Z]'
 " https://unicode-table.com/cn/blocks/cjk-compatibility/
 " https://unicode-table.com/cn/#2031
 " https://unicode-table.com/cn/#2100
-let s:symbol = '[%‰‱\\u3371-\u33df\u2100-\u2109]'
+let s:symbol = '[%‰‱\u3371-\u33df\u2100-\u2109]'
 
 " 空白符号
 let s:blank = '\(\s\|[\u3000]\)'
 
 let s:ERRORS = {
-            \ 'E001' : ['中文字符后存在英文标点'     , s:chars_cn . s:blank . s:punctuation                                     ],
+            \ 'E001' : ['中文字符后存在英文标点'     , s:chars_cn . s:blank . '*' . s:punctuation                               ],
             \ 'E002' : ['中英文之间没有空格'         , '\(' . s:chars_cn . s:chars . '\)\|\(' . s:chars . s:chars_cn . '\)'     ],
             \ 'E003' : ['中文与数字之间没有空格'     , '\(' . s:chars_cn . s:numbers . '\)\|\(' . s:numbers . s:chars_cn . '\)' ],
             \ 'E004' : ['中文标点之后存在空格'       , s:CHINEXE_PUNCTUATION . s:blank . '\+'                                   ],
-            \ 'E005' : ['行尾含有空格'               , s:blank . '\+$'                                                          ],
+            \ 'E005' : ['行尾有空格'                 , s:blank . '\+$'                                                          ],
             \ 'E006' : ['数字和单位之间有空格'       , s:numbers . s:blank . '\+' . s:symbol                                    ],
-            \ 'E007' : ['数字使用了全角数字'         , s:numbers_cn                                                             ],
+            \ 'E007' : ['数字使用了全角数字'         , s:numbers_cn . '\+'                                                      ],
             \ 'E008' : ['汉字之间存在空格'           , s:chars_cn . s:blank . '\+' . s:chars_cn                                 ],
             \ 'E009' : ['汉字与中文标点之间存在空格' , s:chars_cn . s:blank . '\+' . s:CHINEXE_PUNCTUATION                      ],
-            \ 'E010' : ['中文标点符号重复'           , \(s:punctuation_cn\) . s:blank . '\+' . \1\+                             ],
+            \ 'E010' : ['中文标点符号重复'           , '\(' . s:punctuation_cn . '\)' . s:blank . '*' . '\1\+'                                ],
             \ }
 
 
