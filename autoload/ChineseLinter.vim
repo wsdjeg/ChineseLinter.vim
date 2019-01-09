@@ -44,7 +44,7 @@ let s:ERRORS = {
             \ 'E007' : ['数字使用了全角数字'         , s:numbers_cn . '\+'                                                      ],
             \ 'E008' : ['汉字之间存在空格'           , s:chars_cn . s:blank . '\+' . s:chars_cn                                 ],
             \ 'E009' : ['汉字与中文标点之间存在空格' , s:chars_cn . s:blank . '\+' . s:CHINEXE_PUNCTUATION                      ],
-            \ 'E010' : ['中文标点符号重复'           , '\(' . s:punctuation_cn . '\)' . s:blank . '*' . '\1\+'                                ],
+            \ 'E010' : ['中文标点符号重复'           , '\(' . s:punctuation_cn . '\)' . s:blank . '*' . '\1\+'                  ],
             \ }
 
 
