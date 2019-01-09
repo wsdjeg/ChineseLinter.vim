@@ -1,28 +1,39 @@
 scriptencoding utf-8
+
 " 忽略的错误
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
+
 " 中文标点符号（更全）
 let s:CHINEXE_PUNCTUATION = '[\u3002\uff1f\uff01\uff0c\u3001\uff1b\uff1a\u201c\u201d\u2018\u2019\uff08\uff09\u300a\u300b\u3008\u3009\u3010\u3011\u300e\u300f\u300c\u300d\ufe43\ufe44\u3014\u3015\u2026\u2014\uff5e\ufe4f\uffe5]'
+
 " 英文标点
 let s:punctuation = ','
+
 " 中文标点符号
 let s:punctuation_cn = '[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]'
+
 " 中文汉字
 let s:chars_cn = '[\u4e00-\u9fff]'
+
 " 数字
 let s:numbers = '[0-9]'
+
 " 全角数字
 let s:numbers_cn = '[\uff10-\uff19]'
+
 " 英文字母
 let s:chars = '[a-zA-Z]'
+
 " 单位
 " TODO: 需要添加更多的单位，单位见以下链接
 " https://unicode-table.com/cn/blocks/cjk-compatibility/
 " https://unicode-table.com/cn/#2031
 " https://unicode-table.com/cn/#2100
 let s:symbol = '[%‰‱\\u3371-\u33df\u2100-\u2109]'
+
 " 空白符号
 let s:blank = '\(\s\|[\u3000]\)'
+
 let s:ERRORS = {　
             \ 'E001' : ['中文字符后存在英文标点'     , s:chars_cn . s:blank . s:punctuation                                     ],
             \ 'E002' : ['中英文之间没有空格'         , '\(' . s:chars_cn . s:chars . '\)\|\(' . s:chars . s:chars_cn . '\)'     ],
