@@ -34,7 +34,7 @@ let s:symbol = '[%‰‱\\u3371-\u33df\u2100-\u2109]'
 " 空白符号
 let s:blank = '\(\s\|[\u3000]\)'
 
-let s:ERRORS = {　
+let s:ERRORS = {
             \ 'E001' : ['中文字符后存在英文标点'     , s:chars_cn . s:blank . s:punctuation                                     ],
             \ 'E002' : ['中英文之间没有空格'         , '\(' . s:chars_cn . s:chars . '\)\|\(' . s:chars . s:chars_cn . '\)'     ],
             \ 'E003' : ['中文与数字之间没有空格'     , '\(' . s:chars_cn . s:numbers . '\)\|\(' . s:numbers . s:chars_cn . '\)' ],
