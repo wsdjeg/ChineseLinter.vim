@@ -3,6 +3,7 @@
 > 中文文档语言规范检查工具
 
 [![Build Status](https://travis-ci.org/wsdjeg/ChineseLinter.vim.svg?branch=master)](https://travis-ci.org/wsdjeg/ChineseLinter.vim)
+[![codecov](https://codecov.io/gh/wsdjeg/ChineseLinter.vim/branch/master/graph/badge.svg)](https://codecov.io/gh/wsdjeg/ChineseLinter.vim)
 
 ## 使用说明
 
@@ -14,16 +15,17 @@
 
 ## 错误代码
 
-| 代码   | 描述                   |
-| ------ | ---------------------- |
-| `E001` | 中文字符后存在英文标点 |
-| `E002` | 中英文之间没有空格     |
-| `E003` | 中文与数字之间没有空格 |
-| `E004` | 中文标点之后存在空格   |
-| `E005` | 行尾含有空格           |
-| `E006` | 数字和单位之间存在空格 |
-| `E007` | 数字使用了全角字符     |
-| `E008` | 汉字之间存在空格       |
+| 代码   | 描述                       |
+| ------ | -------------------------- |
+| `E001` | 中文字符后存在英文标点     |
+| `E002` | 中英文之间没有空格         |
+| `E003` | 中文与数字之间没有空格     |
+| `E004` | 中文标点之后存在空格       |
+| `E005` | 行尾含有空格               |
+| `E006` | 数字和单位之间存在空格     |
+| `E007` | 数字使用了全角字符         |
+| `E008` | 汉字之间存在空格           |
+| `E009` | 汉字与中文标点之间存在空格 |
 
 ## 配置
 
