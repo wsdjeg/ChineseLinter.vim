@@ -88,13 +88,13 @@ endfunction
 
 function! s:add_to_qf(nr) abort
     let l:error_item = {
-                \ 'bufnr': s:bufnr                        ,
-                \ 'lnum' : s:linenr                       ,
-                \ 'col'  : s:colnr                        ,
-                \ 'vcol' : 0                              ,
-                \ 'text' : a:nr . ' ' . s:ERRORS[a:nr][0] ,
-                \ 'nr'   : a:nr                           ,
-                \ 'type' : 'E'
+                \ 'bufnr': s:bufnr,
+                \ 'lnum' : s:linenr,
+                \ 'col'  : s:colnr,
+                \ 'vcol' : 0,
+                \ 'text' : a:nr . ' ' . s:ERRORS[a:nr][0],
+                \ 'nr'   : a:nr,
+                \ 'type' : 'E',
                 \ }
     call add(s:qf, l:error_item)
 endfunction
