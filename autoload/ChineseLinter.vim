@@ -11,13 +11,13 @@ scriptencoding utf-8
 "   E001  |  中文字符后存在英文标点
 "   E002  |  中英文之间没有空格
 "   E003  |  中文与数字之间没有空格
-"   E004  |  中文标点之后存在空格
+"   E004  |  中文标点两侧存在空格
 "   E005  |  行尾含有空格
 "   E006  |  数字和单位之间存在空格
 "   E007  |  数字使用了全角字符
 "   E008  |  汉字之间存在空格
-"   E009  |  汉字与中文标点之间存在空格
-"   E010  |  中文标点重复
+"   E009  |  中文标点重复
+"   E010  | 英文标点符号两侧的空格数量不对
 " <
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
 
@@ -26,7 +26,7 @@ let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
 let s:CHINEXE_PUNCTUATION = '[\u2010-\u201f\u2026\uff01-\uff0f\uff1a-\uff1f\uff3b-\uff40\uff5b-\uff65]'
 
 " 英文标点
-let s:punctuation = ','
+let s:punctuation_en = '[,:;?!]'
 
 " 中文标点符号
 let s:punctuation_cn = '[‘’“”、。《》『』！＂＇（），／：；＜＝＞？［］｛｝]'
@@ -41,7 +41,7 @@ let s:numbers = '[0-9]'
 let s:numbers_cn = '[\uff10-\uff19]'
 
 " 英文字母
-let s:chars = '[a-zA-Z]'
+let s:chars_en = '[a-zA-Z]'
 
 " 单位
 " TODO: 需要添加更多的单位，单位见以下链接
@@ -54,16 +54,16 @@ let s:symbol = '[%‰‱\u3371-\u33df\u2100-\u2109]'
 let s:blank = '\(\s\|[\u3000]\)'
 
 let s:ERRORS = {
-            \ 'E001' : ['中文字符后存在英文标点'     , s:chars_cn . s:blank . '*' . s:punctuation                                               ],
-            \ 'E002' : ['中英文之间没有空格'         , '\(' . s:chars_cn . s:chars . '\)\|\(' . s:chars . s:chars_cn . '\)'                     ],
-            \ 'E003' : ['中文与数字之间没有空格'     , '\(' . s:chars_cn . s:numbers . '\)\|\(' . s:numbers . s:chars_cn . '\)'                 ],
-            \ 'E004' : ['中文标点之后存在空格'       , s:CHINEXE_PUNCTUATION . s:blank . '\+'                                                   ],
-            \ 'E005' : ['行尾有空格'                 , s:blank . '\+$'                                                                          ],
-            \ 'E006' : ['数字和单位之间有空格'       , s:numbers . s:blank . '\+' . s:symbol                                                    ],
-            \ 'E007' : ['数字使用了全角数字'         , s:numbers_cn . '\+'                                                                      ],
-            \ 'E008' : ['汉字之间存在空格'           , s:chars_cn . s:blank . '\+' . s:chars_cn                                                 ],
-            \ 'E009' : ['汉字与中文标点之间存在空格' , s:chars_cn . s:blank . '\+' . s:CHINEXE_PUNCTUATION                                      ],
-            \ 'E010' : ['中文标点符号重复'           , '\(' . s:punctuation_cn . '\)' . s:blank . '*' . '\1\+' . '\|' . '[、，：；。！？]\{2,}' ],
+            \ 'E001' : ['中文字符后存在英文标点'         , s:chars_cn . s:blank . '*' . s:punctuation_en                                                                                          ],
+            \ 'E002' : ['中英文之间没有空格'             , '\(' . s:chars_cn . s:chars_en . '\)\|\(' . s:chars_en . s:chars_cn . '\)'                                                             ],
+            \ 'E003' : ['中文与数字之间没有空格'         , '\(' . s:chars_cn . s:numbers . '\)\|\(' . s:numbers . s:chars_cn . '\)'                                                               ],
+            \ 'E004' : ['中文标点两侧存在空格'           , '\(' . s:blank . '\+' . s:CHINEXE_PUNCTUATION . '\)\|\(' . s:CHINEXE_PUNCTUATION . s:blank . '\+\)'                                    ],
+            \ 'E005' : ['行尾有空格'                     , s:blank . '\+$'                                                                                                                        ],
+            \ 'E006' : ['数字和单位之间有空格'           , s:numbers . s:blank . '\+' . s:symbol                                                                                                  ],
+            \ 'E007' : ['数字使用了全角数字'             , s:numbers_cn . '\+'                                                                                                                    ],
+            \ 'E008' : ['汉字之间存在空格'               , s:chars_cn . s:blank . '\+' . s:chars_cn                                                                                               ],
+            \ 'E009' : ['中文标点符号重复'               , '\(' . s:punctuation_cn . '\)' . s:blank . '*' . '\1\+' . '\|' . '[、，：；。！？]\{2,}'                                               ],
+            \ 'E010' : ['英文标点符号两侧的空格数量不对' , '\(' . s:blank . '\+' . s:punctuation_en . '\)\|\(' . s:punctuation_en . s:blank . '\+$\)\|\(' . s:punctuation_en . sblank . '\{2,}\)' ],
             \ }
 
 
