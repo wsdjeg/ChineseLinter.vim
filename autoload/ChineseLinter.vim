@@ -75,7 +75,6 @@ function! s:getNotIgnoreErrors()
             call add(s:notIgnoreErrors, l:error_nr)
         endif
     endfor
-    echo s:notIgnoreErrors
 endfunction
         
 function! ChineseLinter#check(...) abort
