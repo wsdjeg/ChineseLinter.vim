@@ -1,0 +1,39 @@
+*ChineseLinter.txt*	中文文档排版检查插件
+wsdjeg                                                         *ChineseLinter*
+
+==============================================================================
+CONTENTS                                              *ChineseLinter-contents*
+  1. Configuration......................................|ChineseLinter-config|
+  2. Commands.........................................|ChineseLinter-commands|
+
+==============================================================================
+CONFIGURATION                                           *ChineseLinter-config*
+
+                                                *g:chinese_linter_disabled_nr*
+指定需要忽略的错误、警告的编号，默认没有禁止。
+>
+  let g:chinese_linter_disabled_nr = ['E001']
+<
+
+目前支持的检查包括：
+>
+  E001  |  中文字符后存在英文标点
+  E002  |  中英文之间没有空格
+  E003  |  中文与数字之间没有空格
+  E004  |  中文标点之后存在空格
+  E005  |  行尾含有空格
+  E006  |  数字和单位之间存在空格
+  E007  |  数字使用了全角字符
+  E008  |  汉字之间存在空格
+  E009  |  汉字与中文标点之间存在空格
+  E010  |  中文标点重复
+<
+
+==============================================================================
+COMMANDS                                              *ChineseLinter-commands*
+
+:CheckChinese                                                  *:CheckChinese*
+  启动检查命令，检查结果会展示在 locallist 内
+
+
+vim:tw=78:ts=8:ft=help:norl:
