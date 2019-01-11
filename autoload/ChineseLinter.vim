@@ -66,8 +66,17 @@ let s:ERRORS = {
             \ 'E010' : ['英文标点符号两侧的空格数量不对' , '\(' . s:blank . '\+' . s:punctuation_en . '\)\|\(' . s:punctuation_en . s:blank . '\+$\)\|\(' . s:punctuation_en . s:blank . '\{2,}\)' ],
             \ }
 
-
+function! s:getNotIgnoreErrors()
+    let s:notIgnoreErrors = []
+    for l:error_nr in keys(s:ERRORS)
+        if index(g:chinese_linter_disabled_nr, l:error_nr) == -1
+            call add(s:notIgnoreErrors, l:error_nr)
+        endif
+    endfor
+endfunction
+        
 function! ChineseLinter#check(...) abort
+    call s:getNotIgnoreErrors()
     let s:file = getline(1,'$')
     let s:bufnr = bufnr('%')
     let s:linenr = 0
@@ -90,10 +99,8 @@ function! ChineseLinter#check(...) abort
 endfunction
 
 function! s:parser(line) abort
-    for l:error_nr in keys(s:ERRORS)
-        if index(g:chinese_linter_disabled_nr, l:error_nr) == -1
-            call s:find_error(l:error_nr, a:line)
-        endif
+    for l:error_nr in s:notIgnoreErrors
+        call s:find_error(l:error_nr, a:line)
     endfor
 endfunction
 
