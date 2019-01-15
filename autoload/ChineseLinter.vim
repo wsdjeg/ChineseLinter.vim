@@ -24,13 +24,20 @@ let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
 
 " 中文标点符号（更全）
 " let s:CHINEXE_PUNCTUATION = '[\u2014\u2015\u2018\u2019\u201c\u201d\u2026\u3001\u3002\u3008\u3009\u300a\u300b\u300c\u300d\u300e\u300f\u3010\u3011\u3014\u3015\ufe43\ufe44\ufe4f\uff01\uff08\uff09\uff0c\uff1a\uff1b\uff1f\uff5e\uffe5]'
-let s:CHINEXE_PUNCTUATION = '[\u2010-\u201f\u2026\uff01-\uff0f\uff1a-\uff1f\uff3b-\uff40\uff5b-\uff65]'
+" [\u2010-\u201f] == [‐‑‒–—―‖‗‘’‚‛“”„‟]
+" [\u2026] == […]
+" [\uff01-\uff0f] == [！＂＃＄％＆＇（）＊＋，－．／]
+" [\uff1a-\uff1f] == [：；＜＝＞？]
+" [\uff3b-\uff40] == [［＼］＾＿｀]
+" [\uff5b-\uff5e] == [｛｜｝～]
+let s:CHINEXE_PUNCTUATION = '[\u2010-\u201f\u2026\uff01-\uff0f\uff1a-\uff1f\uff3b-\uff40\uff5b-\uff5e]'
 
 " 英文标点
 let s:punctuation_en = '[,:;?!]'
 
 " 中文标点符号
-let s:punctuation_cn = '[‘’“”、。《》『』！＂＇（），／：；＜＝＞？［］｛｝]'
+" let s:punctuation_cn = '[‘’“”、。《》『』！＂＇（），／：；＜＝＞？［］｛｝]' 与下面这行代码等价
+let s:punctuation_cn = '[\u2018\u2019\u201c\u201d\u3001\u3002\u300a\u300b\u300e\u300f\uff01\uff02\uff07\uff08\uff09\uff0c\uff0f\uff1a\uff1b\uff1c\uff1d\uff1e\uff1f\uff3b\uff3d\uff5b\uff5d]'
 
 " 中文汉字
 let s:chars_cn = '[\u4e00-\u9fff]'
