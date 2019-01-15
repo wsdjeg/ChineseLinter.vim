@@ -11,24 +11,33 @@ scriptencoding utf-8
 "   E001  |  中文字符后存在英文标点
 "   E002  |  中英文之间没有空格
 "   E003  |  中文与数字之间没有空格
-"   E004  |  中文标点之后存在空格
+"   E004  |  中文标点两侧存在空格
 "   E005  |  行尾含有空格
 "   E006  |  数字和单位之间存在空格
 "   E007  |  数字使用了全角字符
 "   E008  |  汉字之间存在空格
-"   E009  |  汉字与中文标点之间存在空格
-"   E010  |  中文标点重复
+"   E009  |  中文标点重复
+"   E010  | 英文标点符号两侧的空格数量不对
+"   E011  | 中英文之间空格数量多于 1 个
 " <
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
 
 " 中文标点符号（更全）
-let s:CHINEXE_PUNCTUATION = '[\u3002\uff1f\uff01\uff0c\u3001\uff1b\uff1a\u201c\u201d\u2018\u2019\uff08\uff09\u300a\u300b\u3008\u3009\u3010\u3011\u300e\u300f\u300c\u300d\ufe43\ufe44\u3014\u3015\u2026\u2014\uff5e\ufe4f\uffe5]'
+" let s:CHINEXE_PUNCTUATION = '[\u2014\u2015\u2018\u2019\u201c\u201d\u2026\u3001\u3002\u3008\u3009\u300a\u300b\u300c\u300d\u300e\u300f\u3010\u3011\u3014\u3015\ufe43\ufe44\ufe4f\uff01\uff08\uff09\uff0c\uff1a\uff1b\uff1f\uff5e\uffe5]'
+" [\u2010-\u201f] == [‐‑‒–—―‖‗‘’‚‛“”„‟]
+" [\u2026] == […]
+" [\uff01-\uff0f] == [！＂＃＄％＆＇（）＊＋，－．／]
+" [\uff1a-\uff1f] == [：；＜＝＞？]
+" [\uff3b-\uff40] == [［＼］＾＿｀]
+" [\uff5b-\uff5e] == [｛｜｝～]
+let s:CHINEXE_PUNCTUATION = '[\u2010-\u201f\u2026\uff01-\uff0f\uff1a-\uff1f\uff3b-\uff40\uff5b-\uff5e]'
 
 " 英文标点
-let s:punctuation = ','
+let s:punctuation_en = '[,:;?!]'
 
 " 中文标点符号
-let s:punctuation_cn = '[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]'
+" let s:punctuation_cn = '[‘’“”、。《》『』！＂＇（），／：；＜＝＞？［］｛｝]' 与下面这行代码等价
+let s:punctuation_cn = '[\u2018\u2019\u201c\u201d\u3001\u3002\u300a\u300b\u300e\u300f\uff01\uff02\uff07\uff08\uff09\uff0c\uff0f\uff1a\uff1b\uff1c\uff1d\uff1e\uff1f\uff3b\uff3d\uff5b\uff5d]'
 
 " 中文汉字
 let s:chars_cn = '[\u4e00-\u9fff]'
@@ -40,7 +49,7 @@ let s:numbers = '[0-9]'
 let s:numbers_cn = '[\uff10-\uff19]'
 
 " 英文字母
-let s:chars = '[a-zA-Z]'
+let s:chars_en = '[a-zA-Z]'
 
 " 单位
 " TODO: 需要添加更多的单位，单位见以下链接
@@ -53,20 +62,30 @@ let s:symbol = '[%‰‱\u3371-\u33df\u2100-\u2109]'
 let s:blank = '\(\s\|[\u3000]\)'
 
 let s:ERRORS = {
-            \ 'E001' : ['中文字符后存在英文标点'     , s:chars_cn . s:blank . '*' . s:punctuation                               ],
-            \ 'E002' : ['中英文之间没有空格'         , '\(' . s:chars_cn . s:chars . '\)\|\(' . s:chars . s:chars_cn . '\)'     ],
-            \ 'E003' : ['中文与数字之间没有空格'     , '\(' . s:chars_cn . s:numbers . '\)\|\(' . s:numbers . s:chars_cn . '\)' ],
-            \ 'E004' : ['中文标点之后存在空格'       , s:CHINEXE_PUNCTUATION . s:blank . '\+'                                   ],
-            \ 'E005' : ['行尾有空格'                 , s:blank . '\+$'                                                          ],
-            \ 'E006' : ['数字和单位之间有空格'       , s:numbers . s:blank . '\+' . s:symbol                                    ],
-            \ 'E007' : ['数字使用了全角数字'         , s:numbers_cn . '\+'                                                      ],
-            \ 'E008' : ['汉字之间存在空格'           , s:chars_cn . s:blank . '\+' . s:chars_cn                                 ],
-            \ 'E009' : ['汉字与中文标点之间存在空格' , s:chars_cn . s:blank . '\+' . s:CHINEXE_PUNCTUATION                      ],
-            \ 'E010' : ['中文标点符号重复'           , '\(' . s:punctuation_cn . '\)' . s:blank . '*' . '\1\+'                  ],
+            \ 'E001' : ['中文字符后存在英文标点'         , s:chars_cn . s:blank . '*' . s:punctuation_en                                                                                                  ],
+            \ 'E002' : ['中英文之间没有空格'             , '\(' . s:chars_cn . s:chars_en . '\)\|\(' . s:chars_en . s:chars_cn . '\)'                                                                     ],
+            \ 'E003' : ['中文与数字之间没有空格'         , '\(' . s:chars_cn . s:numbers . '\)\|\(' . s:numbers . s:chars_cn . '\)'                                                                       ],
+            \ 'E004' : ['中文标点两侧存在空格'           , '\(' . s:blank . '\+\(' . s:CHINEXE_PUNCTUATION . '\@=\)\)\|\(' . s:CHINEXE_PUNCTUATION . s:blank . '\+\)'                                     ],
+            \ 'E005' : ['行尾有空格'                     , s:blank . '\+$'                                                                                                                                ],
+            \ 'E006' : ['数字和单位之间有空格'           , s:numbers . s:blank . '\+\ze' . s:symbol                                                                                                       ],
+            \ 'E007' : ['数字使用了全角数字'             , s:numbers_cn . '\+'                                                                                                                            ],
+            \ 'E008' : ['汉字之间存在空格'               , s:chars_cn . s:blank . '\+\ze' . s:chars_cn                                                                                                    ],
+            \ 'E009' : ['中文标点符号重复'               , '\(' . s:punctuation_cn . '\)' . s:blank . '*' . '\1\+' . '\|' . '[、，：；。！？]\{2,}'                                                       ],
+            \ 'E010' : ['英文标点符号两侧的空格数量不对' , '\(' . s:blank . '\+\(' . s:punctuation_en . '\@=\)\)\|\(' . s:punctuation_en . s:blank . '\+$\)\|\(' . s:punctuation_en . s:blank . '\{2,}\)' ],
+            \ 'E011' : ['中英文之间空格数量多于 1 个'    , '\(' . s:chars_cn . s:blank . s:blank . '\+\(' . s:chars_en . '\@=\)\)\|\(' . s:chars_en . s:blank . s:blank . '\+\(' . s:chars_cn . '\@=\)\)' ],
             \ }
 
-
+function! s:getNotIgnoreErrors()
+    let s:notIgnoreErrors = []
+    for l:error_nr in keys(s:ERRORS)
+        if index(g:chinese_linter_disabled_nr, l:error_nr) == -1
+            call add(s:notIgnoreErrors, l:error_nr)
+        endif
+    endfor
+endfunction
+        
 function! ChineseLinter#check(...) abort
+    call s:getNotIgnoreErrors()
     let s:file = getline(1,'$')
     let s:bufnr = bufnr('%')
     let s:linenr = 0
@@ -89,10 +108,8 @@ function! ChineseLinter#check(...) abort
 endfunction
 
 function! s:parser(line) abort
-    for l:error_nr in keys(s:ERRORS)
-        if index(g:chinese_linter_disabled_nr, l:error_nr) == -1
-            call s:find_error(l:error_nr, a:line)
-        endif
+    for l:error_nr in s:notIgnoreErrors
+        call s:find_error(l:error_nr, a:line)
     endfor
 endfunction
 
