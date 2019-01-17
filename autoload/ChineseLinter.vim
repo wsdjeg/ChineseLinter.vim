@@ -63,7 +63,7 @@ let s:blank = '\(\s\|[\u3000]\)'
 
 let s:ERRORS = {
             \ 'E001' : [
-            \               ['中文字符后存在英文标点'               , s:chars_cn . s:blank . '*' . s:punctuation_en],
+            \               ['中文字符后存在英文标点'              , s:chars_cn . s:blank . '*' . s:punctuation_en],
             \          ],
             \ 'E002' : [
             \               ['中文与英文之间没有空格'              , s:chars_cn . s:chars_en],
@@ -78,7 +78,7 @@ let s:ERRORS = {
             \               ['中文标点后存在空格'                  , s:CHINEXE_PUNCTUATION . '\zs' . s:blank . '\+'],
             \          ],
             \ 'E005' : [
-            \               ['行尾有空格'                          , s:blank . '\+$']
+            \               ['行尾有空格'                          , s:blank . '\+$'],
             \          ],
             \ 'E006' : [
             \               ['数字和单位之间有空格'                , s:numbers . '\zs' . s:blank . '\+\ze' . s:symbol],
@@ -90,16 +90,16 @@ let s:ERRORS = {
             \               ['汉字之间存在空格'                    , s:chars_cn . '\zs' . s:blank . '\+\ze' . s:chars_cn],
             \          ],
             \ 'E009' : [
-            \               ['中文标点符号重复'                    , '\(' . s:punctuation_cn . s:blank . '*' . '\)\1\+'],
+            \               ['中文标点符号重复'                    , '\(' . s:punctuation_cn . s:blank . '*\)\1\+'],
             \               ['连续多个中文标点符号'                , '[、，：；。！？]\{2,}'],
             \          ],
             \ 'E010' : [
             \               ['英文标点符号前侧存在空格'            , s:blank . '\+\ze' . s:punctuation_en],
-            \               ['英文标点符号后侧的空格数量多于 1 个' , s:punctuation_en . s:blank . '\{2,}\)'],
+            \               ['英文标点符号后侧的空格数量多于 1 个' , s:punctuation_en . s:blank . '\{2,}'],
             \          ],
             \ 'E011' : [
-            \               ['中文与英文之间空格数量多于 1 个'     , s:chars_cn . '\zs' . s:blank . '\{2,}' . '\ze' . s:chars_en],
-            \               ['英文与中文之间空格数量多于 1 个'     , s:chars_en . '\zs' . s:blank . '\{2,}' . '\ze' . s:chars_cn],
+            \               ['中文与英文之间空格数量多于 1 个'     , '\%#=2' . s:chars_cn . '\zs' . s:blank . '\{2,}\ze' . s:chars_en],
+            \               ['英文与中文之间空格数量多于 1 个'     , '\%#=2' . s:chars_en . '\zs' . s:blank . '\{2,}\ze' . s:chars_cn],
             \          ],
             \ }
 
