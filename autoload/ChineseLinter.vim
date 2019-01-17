@@ -95,7 +95,7 @@ let s:ERRORS = {
             \          ],
             \ 'E010' : [
             \               ['英文标点符号前侧存在空格'            , s:blank . '\+\ze' . s:punctuation_en],
-            \               ['英文标点符号后侧的空格数量多于 1 个' , s:punctuation_en . s:blank . '\{2,}'],
+            \               ['英文标点符号后侧的空格数量多于 1 个' , s:punctuation_en  . '\zs' . s:blank . '\{2,}'],
             \          ],
             \ 'E011' : [
             \               ['中文与英文之间空格数量多于 1 个'     , '\%#=2' . s:chars_cn . '\zs' . s:blank . '\{2,}\ze' . s:chars_en],
