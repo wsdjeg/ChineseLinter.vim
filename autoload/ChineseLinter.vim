@@ -100,7 +100,7 @@ function! ChineseLinter#check(...) abort
     if !empty(s:qf)
         let g:wsd = s:qf
         call s:update_qf(s:qf)
-        copen
+        rightbelow copen
     else
         call setqflist([])
         cclose
