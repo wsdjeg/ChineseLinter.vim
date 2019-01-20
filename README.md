@@ -31,7 +31,7 @@
 
 ## 配置
 
-如果需要忽略某些错误， 可以将错误代码加入选项：`g:chinese_linter_disabled_nr`
+如果需要忽略某些错误，可以将错误代码加入选项：`g:chinese_linter_disabled_nr`
 
 ```vim
 let g:chinese_linter_disabled_nr = ['E002', 'E005']
