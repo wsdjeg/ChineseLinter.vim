@@ -29,6 +29,12 @@ CONFIGURATION                                           *ChineseLinter-config*
   E010  |  中文标点重复
 <
 
+                                                  *g:chinese_linter_open_list*
+This setting will open the |location-list| or |quickfix| list (depending on
+whether it is operating on a file) when adding entries. A value of 2 will
+preserve the cursor position when the |location-list| or |quickfix| window is
+opened. Defaults to 2.
+
 ==============================================================================
 COMMANDS                                              *ChineseLinter-commands*
 
