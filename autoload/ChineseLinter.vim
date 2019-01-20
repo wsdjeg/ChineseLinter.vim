@@ -19,6 +19,7 @@ scriptencoding utf-8
 "   E009  |  中文标点重复
 "   E010  |  英文标点符号两侧的空格数量不对
 "   E011  |  中英文之间空格数量多于 1 个
+
 " <
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
 
@@ -126,7 +127,7 @@ function! ChineseLinter#check(...) abort
     if !empty(s:qf)
         let g:wsd = s:qf
         call s:update_qf(s:qf)
-        copen
+        rightbelow copen
     else
         call setqflist([])
         cclose
