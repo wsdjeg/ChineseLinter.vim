@@ -23,6 +23,13 @@ scriptencoding utf-8
 " <
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
 
+""
+" This setting will open the |location-list| or |quickfix| list (depending on
+" whether it is operating on a file) when adding entries. A value of 2 will
+" preserve the cursor position when the |location-list| or |quickfix| window is
+" opened. Defaults to 2.
+let g:chinese_linter_open_list = 2
+
 " 中文标点符号（更全）
 " let s:CHINEXE_PUNCTUATION = '[\u2014\u2015\u2018\u2019\u201c\u201d\u2026\u3001\u3002\u3008\u3009\u300a\u300b\u300c\u300d\u300e\u300f\u3010\u3011\u3014\u3015\ufe43\ufe44\ufe4f\uff01\uff08\uff09\uff0c\uff1a\uff1b\uff1f\uff5e\uffe5]'
 " [\u2010-\u201f] == [‐‑‒–—―‖‗‘’‚‛“”„‟]
@@ -125,12 +132,17 @@ function! ChineseLinter#check(...) abort
         call s:parser(l:line)
     endfor
     if !empty(s:qf)
-        let g:wsd = s:qf
         call s:update_qf(s:qf)
-        rightbelow copen
+        if g:chinese_linter_open_list == 1
+            rightbelow copen
+        elseif g:chinese_linter_open_list ==2
+            rightbelow copen
+            wincmd p
+        endif
     else
         call setqflist([])
         cclose
+        doautocmd WinEnter
     endif
     unlet s:linenr = 0
     unlet s:colnr = 0

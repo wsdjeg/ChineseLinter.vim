@@ -9,25 +9,11 @@ CONTENTS                                              *ChineseLinter-contents*
 ==============================================================================
 CONFIGURATION                                           *ChineseLinter-config*
 
-                                                *g:chinese_linter_disabled_nr*
-指定需要忽略的错误、警告的编号，默认没有禁止。
->
-  let g:chinese_linter_disabled_nr = ['E001']
-<
-
-目前支持的检查包括：
->
-  E001  |  中文字符后存在英文标点
-  E002  |  中英文之间没有空格
-  E003  |  中文与数字之间没有空格
-  E004  |  中文标点两侧存在空格
-  E005  |  行尾含有空格
-  E006  |  数字和单位之间存在空格
-  E007  |  数字使用了全角字符
-  E008  |  汉字之间存在空格
-  E009  |  中文标点重复
-  E010  |  英文标点符号两侧的空格数量不对
-  E011  |  中英文之间空格数量多于 1 个
+                                                  *g:chinese_linter_open_list*
+This setting will open the |location-list| or |quickfix| list (depending on
+whether it is operating on a file) when adding entries. A value of 2 will
+preserve the cursor position when the |location-list| or |quickfix| window is
+opened. Defaults to 2.
 
 ==============================================================================
 COMMANDS                                              *ChineseLinter-commands*
