@@ -72,7 +72,7 @@ let s:symbol = '[%‰‱\u3371-\u33df\u2100-\u2109]'
 
 " 空白符号
 let s:blank = '\(\s\|[\u3000]\)'
-
+,!?
 let s:ERRORS = {
             \ 'E001' : [
             \               ['中文字符后存在英文标点'              , s:chars_cn . s:blank . '*' . s:punctuation_en],
@@ -106,7 +106,9 @@ let s:ERRORS = {
             \               ['连续多个中文标点符号'                , '[、，：；。！？]\{2,}'],
             \          ],
             \ 'E010' : [
-            \               ['英文标点符号前侧存在空格'            , s:blank . '\+\ze' . s:punctuation_en],
+            \               ['英文标点前侧存在空格'                , s:blank . '\+\ze' . s:punctuation_en],
+            \               ['英文标点与英文之间没有空格'          , '[,:;?!]' . s:chars_en],
+            \               ['英文标点与中文之间没有空格'          , '[,:;?!]' . s:chars_cn],
             \               ['英文标点符号后侧的空格数量多于 1 个' , s:punctuation_en  . '\zs' . s:blank . '\{2,}'],
             \          ],
             \ 'E011' : [
