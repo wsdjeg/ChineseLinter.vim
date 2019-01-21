@@ -10,7 +10,7 @@ scriptencoding utf-8
 " >
 "   E001  |  中文字符后存在英文标点
 "   E002  |  中英文之间没有空格
-"   E003  |  中文与数字之间没有空格
+"   E003  |  中文和数字之间没有空格
 "   E004  |  中文标点两侧存在空格
 "   E005  |  行尾含有空格
 "   E006  |  数字和单位之间存在空格
@@ -19,8 +19,13 @@ scriptencoding utf-8
 "   E009  |  中文标点重复
 "   E010  |  英文标点符号两侧的空格数量不对
 "   E011  |  中英文之间空格数量多于 1 个
-
+"   E012  |  中文和数字之间空格数量多于 1 个
+"   E013  |  英文和数字之间没有空格
+"   E014  |  英文和数字之间空格数量多于 1 个
+"   E015  |  英文标点重复
+"   E016  |  连续的空行数量大于 2 行
 " <
+
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
 
 ""
@@ -41,7 +46,7 @@ let g:chinese_linter_open_list = 2
 let s:CHINEXE_PUNCTUATION = '[\u2010-\u201f\u2026\uff01-\uff0f\uff1a-\uff1f\uff3b-\uff40\uff5b-\uff5e]'
 
 " 英文标点
-let s:punctuation_en = '[,:;?!]'
+let s:punctuation_en = '[,:;?!-]'
 
 " 中文标点符号
 " let s:punctuation_cn = '[‘’“”、。《》『』！＂＇（），／：；＜＝＞？［］｛｝]' 与下面这行代码等价
@@ -98,16 +103,37 @@ let s:ERRORS = {
             \               ['汉字之间存在空格'                    , s:chars_cn . '\zs' . s:blank . '\+\ze' . s:chars_cn],
             \          ],
             \ 'E009' : [
-            \               ['中文标点符号重复'                    , '\(' . s:punctuation_cn . s:blank . '*\)\1\+'],
+            \               ['中文标点符号重复'                    , '\(' . s:punctuation_cn . '\)\1\+'],
             \               ['连续多个中文标点符号'                , '[、，：；。！？]\{2,}'],
             \          ],
             \ 'E010' : [
-            \               ['英文标点符号前侧存在空格'            , s:blank . '\+\ze' . s:punctuation_en],
+            \               ['英文标点前侧存在空格'                , s:blank . '\+\ze' . s:punctuation_en],
+            \               ['英文标点与英文之间没有空格'          , '[,:;?!]' . s:chars_en],
+            \               ['英文标点与中文之间没有空格'          , '[,:;?!]' . s:chars_cn],
             \               ['英文标点符号后侧的空格数量多于 1 个' , s:punctuation_en  . '\zs' . s:blank . '\{2,}'],
             \          ],
             \ 'E011' : [
             \               ['中文与英文之间空格数量多于 1 个'     , '\%#=2' . s:chars_cn . '\zs' . s:blank . '\{2,}\ze' . s:chars_en],
             \               ['英文与中文之间空格数量多于 1 个'     , '\%#=2' . s:chars_en . '\zs' . s:blank . '\{2,}\ze' . s:chars_cn],
+            \          ],
+            \ 'E012' : [
+            \               ['中文与数字之间空格数量多于 1 个'     , '\%#=2' . s:chars_cn . '\zs' . s:blank . '\{2,}\ze' . s:numbers],
+            \               ['数字与中文之间空格数量多于 1 个'     , '\%#=2' . s:numbers . '\zs' . s:blank . '\{2,}\ze' . s:chars_cn],
+            \          ],
+            \ 'E013' : [
+            \               ['英文与数字之间没有空格'              , s:chars_en . s:numbers],
+            \               ['数字与英文之间没有空格'              , s:numbers . s:chars_en],
+            \          ],
+            \ 'E014' : [
+            \               ['英文与数字之间空格数量多于 1 个'     , s:chars_en . '\zs' . s:blank . '\{2,}\ze' . s:numbers],
+            \               ['数字与英文之间空格数量多于 1 个'     , s:numbers . '\zs' . s:blank . '\{2,}\ze' . s:chars_en],
+            \          ],
+            \ 'E015' : [
+            \               ['英文标点符号重复'                    , '\(' . s:punctuation_en . s:blank . '*\)\1\+'],
+            \               ['连续多个英文标点符号'                , '\(' . '[,:;?!-]' . s:blank . '*\)\{2,}'],
+            \          ],
+            \ 'E016' : [
+            \               ['连续的空行数量大于 2 行'             , '^\(' . s:blank . '*\n\)\{3,}'],
             \          ],
             \ }
 
