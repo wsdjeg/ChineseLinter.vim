@@ -23,6 +23,7 @@ scriptencoding utf-8
 "   E013  |  英文和数字之间没有空格
 "   E014  |  英文和数字之间空格数量多于 1 个
 "   E015  |  英文标点重复
+"   E016  |  连续的空行数量大于 2 行
 " <
 
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
@@ -130,6 +131,9 @@ let s:ERRORS = {
             \ 'E015' : [
             \               ['英文标点符号重复'                    , '\(' . s:punctuation_en . s:blank . '*\)\1\+'],
             \               ['连续多个英文标点符号'                , '\(' . '[,:;?!-]' . s:blank . '*\)\{2,}'],
+            \          ],
+            \ 'E016' : [
+            \               ['连续的空行数量大于 2 行'             , '^\(' . s:blank . '*\n\)\{3,}'],
             \          ],
             \ }
 
