@@ -73,7 +73,7 @@ let s:symbol = '[%‰‱\u3371-\u33df\u2100-\u2109]'
 
 " 空白符号
 let s:blank = '\(\s\|[\u3000]\)'
-,!?
+
 let s:ERRORS = {
             \ 'E001' : [
             \               ['中文字符后存在英文标点'              , s:chars_cn . s:blank . '*' . s:punctuation_en],
