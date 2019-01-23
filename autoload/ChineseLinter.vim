@@ -144,8 +144,8 @@ function! ChineseLinter#check(...) abort
         cclose
         doautocmd WinEnter
     endif
-    unlet s:linenr = 0
-    unlet s:colnr = 0
+    unlet s:linenr
+    unlet s:colnr
 endfunction
 
 function! s:parser(line) abort
