@@ -19,7 +19,7 @@ chinese_linter_open_list = 2
 <
 
 ==============================================================================
-disabled_nr                                      *g:chinese_linter_disabled_nr
+DISABLED_NR                                      *g:chinese_linter_disabled_nr
 This setting is a list used to record the error codes that need to be ignored.
 Defaults to [].
 >
