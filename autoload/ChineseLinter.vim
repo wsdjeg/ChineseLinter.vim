@@ -209,6 +209,6 @@ endfunction
 
 " TODO 加入语法分析
 
-function! s:update_qf(dict) abort
-    call setqflist(a:dict)
+function! s:update_qf(listOfDicts) abort
+    call setqflist(a:listOfDicts)
 endfunction

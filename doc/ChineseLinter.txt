@@ -9,11 +9,22 @@ CONTENTS                                              *ChineseLinter-contents*
 ==============================================================================
 CONFIGURATION                                           *ChineseLinter-config*
 
-                                                  *g:chinese_linter_open_list*
+OPEN_LIST                                         *g:chinese_linter_open_list*
 This setting will open the |location-list| or |quickfix| list (depending on
 whether it is operating on a file) when adding entries. A value of 2 will
 preserve the cursor position when the |location-list| or |quickfix| window is
 opened. Defaults to 2.
+>
+chinese_linter_open_list = 2
+<
+
+==============================================================================
+DISABLED_NR                                      *g:chinese_linter_disabled_nr
+This setting is a list used to record the error codes that need to be ignored.
+Defaults to [].
+>
+chinese_linter_disabled_nr = []
+>
 
 ==============================================================================
 COMMANDS                                              *ChineseLinter-commands*
