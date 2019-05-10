@@ -1,3 +1,4 @@
 ""
-" 启动检查命令，检查结果会展示在 locallist 内
+" Start checking the document, and the results will be shown in the local
+" list.
 command! -nargs=? CheckChinese call ChineseLinter#check(<q-args>)
