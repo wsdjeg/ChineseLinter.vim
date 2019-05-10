@@ -1,4 +1,4 @@
-*ChineseLinter.txt*	中文文档排版检查插件
+*ChineseLinter.txt*	The Chinese Linter
 wsdjeg                                                         *ChineseLinter*
 
 ==============================================================================
@@ -30,7 +30,7 @@ chinese_linter_disabled_nr = []
 COMMANDS                                              *ChineseLinter-commands*
 
 :CheckChinese                                                  *:CheckChinese*
-  启动检查命令，检查结果会展示在 locallist 内
+  Start checking the document, and the results will be shown in the local list.
 
 
 vim:tw=78:ts=8:ft=help:norl:
