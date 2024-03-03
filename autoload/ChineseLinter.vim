@@ -89,7 +89,7 @@ let s:ERRORS = {
             \          ],
             \ 'E004' : [
             \               ['中文标点前存在空格'                  , s:blank . '\+\ze' . s:CHINESE_PUNCTUATION],
-            \               ['中文标点后存在空格'                  , s:CHINEXE_PUNCTUATION . '\zs' . s:blank . '\+'],
+            \               ['中文标点后存在空格'                  , s:CHINESE_PUNCTUATION . '\zs' . s:blank . '\+'],
             \          ],
             \ 'E005' : [
             \               ['行尾有空格'                          , s:blank . '\+$'],
