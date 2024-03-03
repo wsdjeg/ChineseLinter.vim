@@ -37,14 +37,14 @@ let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
 let g:chinese_linter_open_list = 2
 
 " 中文标点符号（更全）
-" let s:CHINEXE_PUNCTUATION = '[\u2014\u2015\u2018\u2019\u201c\u201d\u2026\u3001\u3002\u3008\u3009\u300a\u300b\u300c\u300d\u300e\u300f\u3010\u3011\u3014\u3015\ufe43\ufe44\ufe4f\uff01\uff08\uff09\uff0c\uff1a\uff1b\uff1f\uff5e\uffe5]'
+" let s:CHINESE_PUNCTUATION = '[\u2014\u2015\u2018\u2019\u201c\u201d\u2026\u3001\u3002\u3008\u3009\u300a\u300b\u300c\u300d\u300e\u300f\u3010\u3011\u3014\u3015\ufe43\ufe44\ufe4f\uff01\uff08\uff09\uff0c\uff1a\uff1b\uff1f\uff5e\uffe5]'
 " [\u2010-\u201f] == [‐‑‒–—―‖‗‘’‚‛“”„‟]
 " [\u2026] == […]
 " [\uff01-\uff0f] == [！＂＃＄％＆＇（）＊＋，－．／]
 " [\uff1a-\uff1f] == [：；＜＝＞？]
 " [\uff3b-\uff40] == [［＼］＾＿｀]
 " [\uff5b-\uff5e] == [｛｜｝～]
-let s:CHINEXE_PUNCTUATION = '[\u2010-\u201f\u2026\uff01-\uff0f\uff1a-\uff1f\uff3b-\uff40\uff5b-\uff5e]'
+let s:CHINESE_PUNCTUATION = '[\u2010-\u201f\u2026\uff01-\uff0f\uff1a-\uff1f\uff3b-\uff40\uff5b-\uff5e]'
 
 " 英文标点
 let s:punctuation_en = '[,:;?!-]'
@@ -88,7 +88,7 @@ let s:ERRORS = {
             \               ['数字与中文之间没有空格'              , s:numbers . s:chars_cn],
             \          ],
             \ 'E004' : [
-            \               ['中文标点前存在空格'                  , s:blank . '\+\ze' . s:CHINEXE_PUNCTUATION],
+            \               ['中文标点前存在空格'                  , s:blank . '\+\ze' . s:CHINESE_PUNCTUATION],
             \               ['中文标点后存在空格'                  , s:CHINEXE_PUNCTUATION . '\zs' . s:blank . '\+'],
             \          ],
             \ 'E005' : [
