@@ -140,8 +140,12 @@ let s:ERRORS = {
             \ 'E017' : [
             \               ['数字之间存在空格'                    , s:numbers . '\zs' . s:blank . '\+\ze' . s:numbers],
             \          ],
+            \ 'E020' : [
+            \               ['省略号“…”的数量只有 1 个'            , '\(^\|[^…]\)' . '\zs' . '…' . '\ze' . '\([^…]\|$\)'],
+            \               ['省略号“…”的数量大于 2 个'            , '…\{3,}'],
+            \          ],
             \ }
-
+ab
 function! s:getNotIgnoreErrors()
     let s:notIgnoreErrorList = []
     for l:errors_nr in keys(s:ERRORS)
