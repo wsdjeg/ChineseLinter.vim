@@ -25,6 +25,7 @@ scriptencoding utf-8
 "   E015  |  英文标点重复
 "   E016  |  连续的空行数量大于 2 行
 "   E017  |  数字之间存在空格
+"   E019  |  行首、行尾存在不应出现的标点
 " <
 
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
