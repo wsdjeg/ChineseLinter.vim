@@ -41,6 +41,7 @@ call dein#add('https://wsdjeg.net/git/ChineseLinter.vim/')
 | `E015` | 英文标点重复                    |
 | `E016` | 连续的空行数量大于 2 行         |
 | `E017` | 数字之间存在空格                |
+| `E018` | 行首含有空格                    |
 
 ## 配置
 
