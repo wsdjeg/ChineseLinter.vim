@@ -80,7 +80,7 @@ let s:blank = '\(\s\|[\u3000]\)'
 
 let s:ERRORS = {
             \ 'E001' : [
-            \               ['中文字符后存在英文标点'              , s:chars_cn . s:blank . '*' . s:punctuation_en],
+            \               ['中文字符后存在英文标点'              , s:chars_cn . '[､,:;?!]'],
             \          ],
             \ 'E002' : [
             \               ['中文与英文之间没有空格'              , s:chars_cn . s:chars_en],
