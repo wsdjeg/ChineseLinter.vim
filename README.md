@@ -5,6 +5,12 @@
 [![Build Status](https://travis-ci.org/wsdjeg/ChineseLinter.vim.svg?branch=master)](https://travis-ci.org/wsdjeg/ChineseLinter.vim)
 [![codecov](https://codecov.io/gh/wsdjeg/ChineseLinter.vim/branch/master/graph/badge.svg)](https://codecov.io/gh/wsdjeg/ChineseLinter.vim)
 
+## 安装
+
+```vim
+call dein#add('https://wsdjeg.net/git/ChineseLinter.vim/')
+```
+
 ## 使用说明
 
 在编辑中文文档时，使用如下命令即可检查，错误信息将被展示在 `local list` 窗口。
@@ -12,6 +18,7 @@
 ```vim
 :CheckChinese
 ```
+
 
 ## 错误代码
 
