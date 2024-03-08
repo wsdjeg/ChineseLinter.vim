@@ -27,6 +27,7 @@ scriptencoding utf-8
 "   E017  |  数字之间存在空格
 "   E018  |  行首含有空格
 "   E019  |  行首、行尾存在不应出现的标点
+"   E020  |  省略号“…”的数量不是 2 个
 " <
 
 let g:chinese_linter_disabled_nr = get(g:,'chinese_linter_disabled_nr', [])
@@ -147,9 +148,12 @@ let s:ERRORS = {
             \ 'E019' : [
             \               ['存在不应出现在行首的标点'            , '^' . '[､,:;｡?!/\)\]】}’”、，：；。？！／》』）］】｝]'],
             \               ['存在不应出现在行尾的标点'            , '[､,/\(\[【{‘“、，／《『（［【｛]' . '$'],
+            \ 'E020' : [
+            \               ['省略号“…”的数量只有 1 个'            , '\(^\|[^…]\)' . '\zs' . '…' . '\ze' . '\([^…]\|$\)'],
+            \               ['省略号“…”的数量大于 2 个'            , '…\{3,}'],
             \          ],
             \ }
-
+ab
 function! s:getNotIgnoreErrors()
     let s:notIgnoreErrorList = []
     for l:errors_nr in keys(s:ERRORS)

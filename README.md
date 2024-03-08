@@ -43,6 +43,7 @@ call dein#add('https://wsdjeg.net/git/ChineseLinter.vim/')
 | `E017` | 数字之间存在空格                |
 | `E018` | 行首含有空格                    |
 | `E019` | 行首、行尾存在不应出现的标点    |
+| `E020` | 省略号“…”的数量不是 2 个        |
 
 ## 配置
 
