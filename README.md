@@ -2,8 +2,9 @@
 
 > 中文文档语言规范检查工具
 
-[![Build Status](https://travis-ci.org/wsdjeg/ChineseLinter.vim.svg?branch=master)](https://travis-ci.org/wsdjeg/ChineseLinter.vim)
-[![codecov](https://codecov.io/gh/wsdjeg/ChineseLinter.vim/branch/master/graph/badge.svg)](https://codecov.io/gh/wsdjeg/ChineseLinter.vim)
+**WARNING**
+
+The development of ChineseLinter.vim is stopped. check [ChineseLinter.nvim](https://github.com/wsdjeg/ChineseLinter.nvim) instead.
 
 ## 安装
 
