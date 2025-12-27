@@ -159,7 +159,7 @@ let s:ERRORS = {
             \               ['破折号“—”的数量大于 2 个'            , '—\{3,}'],
             \          ],
             \ }
-ab
+
 function! s:getNotIgnoreErrors()
     let s:notIgnoreErrorList = []
     for l:errors_nr in keys(s:ERRORS)
